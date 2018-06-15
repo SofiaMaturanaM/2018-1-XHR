@@ -1,12 +1,16 @@
-function downloadShibe(){
+function downloadShibe() {
     var xhttp = new XMLHttpRequest(); //Objeto que representa la petición (request)
+    const load = document.getElementById("loader");
+    load.style = "display: block;";
     xhttp.onreadystatechange = function() { //Evento cuando el estado haya cambiado (cuando esté listo) Se ejecutará cuando esté lista, cuando reciba la respuesta
         if (this.readyState == 4 && this.status == 200) { //Todas las respuestas “200 y algo” serán respuestas satisfactorias
+            load.style = "display: none;";
             const dogeResponse = JSON.parse(this.responseText); //No usar funciones flechas cuando usamos this.  usar json punto stringify cuando tratemos con objetos 
             const dogeReceptorDiv = document.getElementById("dogeReceptor");
-            for(let dogeIndex=0; dogeIndex < dogeResponse.length; dogeIndex++){
+            for (let dogeIndex = 0; dogeIndex < dogeResponse.length; dogeIndex++) {
                 const dogeImg = document.createElement('img'); //Aquí "almaceno" las imágenes
                 dogeImg.src = dogeResponse[dogeIndex];
+                dogeImg.classList = "doges";
                 dogeReceptorDiv.appendChild(dogeImg);
             }
         }
@@ -18,4 +22,6 @@ function downloadShibe(){
      * Podemos seguir ejecutando código acá mientras esperamos la respuesta
      */
     console.log("Holi soy doge");
+
+
 }
